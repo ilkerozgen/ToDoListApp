@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <style>
+      .container {
+        margin-top: 10%;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      input {
+        margin: 5px;
+        border-radius: 5px;
+        padding: 5px;
+        width: 200px;
+        border: 1px solid;
+      }
+
+      button {
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+        width: 100px;
+        transition: 0.3s;
+        border: 1px solid;
+        margin-bottom: -10px;
+      }
+
+      button:hover {
+        cursor: pointer;
+        background-color: #ccc8c8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="center"><h1>REGISTER NOW!</h1></div>
+      <div class="center">
+        <form action="{{ url_for('register') }}" method="post">
+          {% if message is defined and message %}
+          <div>{{ message }}</div>
+          {% endif %}
+          <table>
+            <tr>
+              <td>
+                <label for="username">Username:</label>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="Enter name"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="email">Email:</label></td>
+              <td>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter email"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="pwd">Password:</label></td>
+              <td>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter password"
+                />
+              </td>
+            </tr>
+          </table>
+          <div>
+            <button type="submit">Register</button>
+          </div>
+        </form>
+      </div>
+      <div class="center">
+        <form action="{{ url_for('login') }}" method="get">
+          <button>Login</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

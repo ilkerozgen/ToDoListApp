@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      h1 {
+        margin-top: 40px;
+      }
+
+      table,
+      th,
+      td,
+      tr {
+        border: 1px;
+        border-style: solid;
+        border-collapse: collapse;
+        padding: 10px;
+      }
+
+      th {
+        background-color: #cccccc;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .navbar {
+        background-color: #333;
+        overflow: hidden;
+        top: 0;
+      }
+
+      .navbar-button {
+        float: left;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        border: none;
+        transition: 0.3s;
+      }
+
+      .navbar-button:hover {
+        background-color: grey;
+        cursor: pointer;
+      }
+
+      .logout {
+        float: right;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        border: none;
+        transition: 0.3s;
+      }
+
+      .logout:hover {
+        background-color: grey;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <form action="{{ url_for('tasks') }}">
+        <button class="navbar-button">Home</button>
+      </form>
+      <form action="{{ url_for('analysis') }}">
+        <button class="navbar-button">Analysis</button>
+      </form>
+      <form action="{{ url_for('add') }}">
+        <button class="navbar-button">Add Task</button>
+      </form>
+      <form action="{{ url_for('delete') }}">
+        <button class="navbar-button">Delete Task</button>
+      </form>
+      <form action="{{ url_for('edit') }}">
+        <button class="navbar-button">Edit Task</button>
+      </form>
+      <form action="{{ url_for('finish') }}">
+        <button class="navbar-button">Finish Task</button>
+      </form>
+      <a href="/logout-login"
+        ><input class="logout" type="button" value="Log Out"
+      /></a>
+    </div>
+    <h1 class="center">All Tasks</h1>
+    <div class="center">
+      <table>
+        <thead>
+          <tr>
+            {% for header in headers %}
+            <th>{{header}}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in tasks %}
+          <tr>
+            <td>{{row['id']}}</td>
+            <td>{{row['title']}}</td>
+            <td>{{row['description']}}</td>
+            <td>{{row['status']}}</td>
+            <td>{{row['deadline']}}</td>
+            <td>{{row['creation_time']}}</td>
+            <td>{{row['done_time']}}</td>
+            <td>{{row['task_type']}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <h1 class="center">Completed Tasks</h1>
+    <div class="center">
+      <table>
+        <thead>
+          <tr>
+            {% for header in headers %}
+            <th>{{header}}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in completed_tasks %}
+          <tr>
+            <td>{{row['id']}}</td>
+            <td>{{row['title']}}</td>
+            <td>{{row['description']}}</td>
+            <td>{{row['status']}}</td>
+            <td>{{row['deadline']}}</td>
+            <td>{{row['creation_time']}}</td>
+            <td>{{row['done_time']}}</td>
+            <td>{{row['task_type']}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

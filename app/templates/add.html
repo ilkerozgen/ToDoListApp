@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      h1 {
+        margin-top: 40px;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .navbar {
+        background-color: #333;
+        overflow: hidden;
+      }
+
+      .navbar-button {
+        float: left;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        border: none;
+        transition: 0.3s;
+      }
+
+      .navbar-button:hover {
+        background-color: grey;
+        cursor: pointer;
+      }
+
+      .logout {
+        float: right;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        border: none;
+        transition: 0.3s;
+      }
+
+      .logout:hover {
+        background-color: grey;
+        cursor: pointer;
+      }
+
+      input {
+        margin: 5px;
+        border-radius: 5px;
+        padding: 5px;
+        width: 200px;
+        border: 1px solid;
+      }
+
+      select {
+        margin: 5px;
+        border-radius: 5px;
+        padding: 5px;
+        width: 214px;
+        border: 1px solid;
+      }
+
+      .add-button {
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+        width: 100px;
+        margin-top: 15px;
+        transition: 0.3s;
+        border: 1px solid;
+      }
+
+      .add-button:hover {
+        cursor: pointer;
+        background-color: #ccc8c8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <form action="{{ url_for('tasks') }}">
+        <button class="navbar-button">Home</button>
+      </form>
+      <form action="{{ url_for('analysis') }}">
+        <button class="navbar-button">Analysis</button>
+      </form>
+      <form action="{{ url_for('add') }}">
+        <button class="navbar-button">Add Task</button>
+      </form>
+      <form action="{{ url_for('delete') }}">
+        <button class="navbar-button">Delete Task</button>
+      </form>
+      <form action="{{ url_for('edit') }}">
+        <button class="navbar-button">Edit Task</button>
+      </form>
+      <form action="{{ url_for('finish') }}">
+        <button class="navbar-button">Finish Task</button>
+      </form>
+      <a href="/logout-login"
+        ><input class="logout" type="button" value="Log Out"
+      /></a>
+    </div>
+    <h1 class="center">Add Task</h1>
+    <div class="center">
+      <form action="{{ url_for('add') }}" method="post">
+        {% if message is defined and message %}
+        <div>{{ message }}</div>
+        {% endif %}
+        <table>
+          <tr>
+            <td>
+              <label for="title">Title:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Enter title"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="description">Description:</label></td>
+            <td>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Enter description"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="deadline">Deadline:</label></td>
+            <td>
+              <input
+                type="datetime-local"
+                id="deadline"
+                name="deadline"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="tasktype">Task Type:</label></td>
+            <td>
+              <select
+                id="tasktype"
+                name="tasktype"
+              >
+              <option value="" selected disabled hidden>Select task type</option>
+                {% for row in types %}
+                  <option value={{row['type']}}>{{row['type']}}</option>
+                {% endfor %}
+              </select>
+            </td>
+          </tr>
+        </table>
+        <div>
+          <button type="submit" class="add-button">Add</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

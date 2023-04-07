@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      h1 {
+        margin-top: 40px;
+        margin-bottom: 50px;
+      }
+
+      h3 {
+        margin-top: -10px;
+      }
+
+      table,
+      th,
+      td,
+      tr {
+        border: 1px;
+        border-style: solid;
+        border-collapse: collapse;
+        padding: 10px;
+      }
+
+      th {
+        background-color: #cccccc;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .center-child {
+        float: left;
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+
+      .navbar {
+        background-color: #333;
+        overflow: hidden;
+      }
+
+      .navbar-button {
+        float: left;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        border: none;
+        transition: 0.3s;
+      }
+
+      .navbar-button:hover {
+        background-color: grey;
+        cursor: pointer;
+      }
+
+      .logout {
+        float: right;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        border: none;
+        transition: 0.3s;
+      }
+
+      .logout:hover {
+        background-color: grey;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <form action="{{ url_for('tasks') }}">
+        <button class="navbar-button">Home</button>
+      </form>
+      <form action="{{ url_for('analysis') }}">
+        <button class="navbar-button">Analysis</button>
+      </form>
+      <form action="{{ url_for('add') }}">
+        <button class="navbar-button">Add Task</button>
+      </form>
+      <form action="{{ url_for('delete') }}">
+        <button class="navbar-button">Delete Task</button>
+      </form>
+      <form action="{{ url_for('edit') }}">
+        <button class="navbar-button">Edit Task</button>
+      </form>
+      <form action="{{ url_for('finish') }}">
+        <button class="navbar-button">Finish Task</button>
+      </form>
+      <a href="/logout-login"
+        ><input class="logout" type="button" value="Log Out"
+      /></a>
+    </div>
+    <h1 class="center">Analysis</h1>
+    <div class="center">
+      <div class="center-child">
+        <h3 class="center">Tasks that were completed</h3>
+        <h3 class="center">after their deadlines:</h3>
+        <div class="center">
+          <table>
+            <thead>
+              <tr>
+                {% for header in headers1 %}
+                <th>{{header}}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in analysis1 %}
+              <tr>
+                <td>{{row['title']}}</td>
+                <td>{{row['latency']}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="center-child">
+        <h3 class="center">Average task</h3>
+        <h3 class="center">completion time:</h3>
+        <div class="center">
+          <table>
+            <thead>
+              <tr>
+                {% for header in headers2 %}
+                <th>{{header}}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in analysis2 %}
+              <tr>
+                <td>{{row['avg']}} hours</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="center-child">
+        <h3 class="center">Number of the completed</h3>
+        <h3 class="center">tasks per task type:</h3>
+        <div class="center">
+          <table>
+            <thead>
+              <tr>
+                {% for header in headers3 %}
+                <th>{{header}}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in analysis3 %}
+              <tr>
+                <td>{{row['task_type']}}</td>
+                <td>{{row['num']}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="center-child">
+        <h3 class="center">Uncompleted tasks:</h3>
+        <div class="center">
+          <table>
+            <thead>
+              <tr>
+                {% for header in headers4 %}
+                <th>{{header}}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in analysis4 %}
+              <tr>
+                <td>{{row['title']}}</td>
+                <td>{{row['deadline']}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="center-child">
+        <h3 class="center">Top 2 completed tasks</h3>
+        <h3 class="center">that took the most time:</h3>
+        <div class="center">
+          <table>
+            <thead>
+              <tr>
+                {% for header in headers5 %}
+                <th>{{header}}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in analysis5 %}
+              <tr>
+                <td>{{row['title']}}</td>
+                <td>{{row['completion_time']}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

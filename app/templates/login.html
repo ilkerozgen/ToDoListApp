@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        margin-top: 12%;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      input {
+        margin: 5px;
+        border-radius: 5px;
+        padding: 5px;
+        width: 200px;
+        border: 1px solid;
+      }
+
+      button {
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+        width: 100px;
+        transition: 0.3s;
+        border: 1px solid;
+      }
+
+      button:hover {
+        cursor: pointer;
+        background-color: #ccc8c8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="center"><h1>WELCOME TO TO-DO APP!</h1></div>
+      <div class="center">
+        <form action="{{ url_for('login') }}" method="post">
+          {% if message is defined and message %}
+          <div>{{ message }}</div>
+          {% endif %}
+          <table>
+            <tr>
+              <td><label for="username">Username:</label></td>
+              <td>
+                <input
+                  type="username"
+                  id="username"
+                  name="username"
+                  placeholder="Enter username"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="password">Password:</label></td>
+              <td>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter password"
+                />
+              </td>
+            </tr>
+          </table>
+          <div>
+            <button type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+      <div class="center">
+        <form action="{{ url_for('register') }}" method="get">
+          <button>Register</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
